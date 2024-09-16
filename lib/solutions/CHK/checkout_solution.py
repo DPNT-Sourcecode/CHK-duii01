@@ -9,6 +9,7 @@ Our price table and offers:
 | D    | 15    |                |
 +------+-------+----------------+
 """
+import math
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -20,13 +21,17 @@ def checkout(skus):
     print(letter_dict)
     for key in letter_dict.keys():
         print(key)
-        # for each key in letter_dict, do value % discounts value[0] and take that value away from total but add on value[1]
-        discounts_applied = letter_dict[key]%discounts[key][0]
-        print(discounts_applied)
+        if key in discounts.keys():
+            # for each key in letter_dict, do value % discounts value[0] and take that value away from total but add on value[1]
+            discounts_applied = math.floor(letter_dict[key]/discounts[key][0])
+            print(discounts_applied)
+        else:
+            discounts_applied = 0
         totals[key] = (letter_dict[key]-discounts_applied*discounts[key][0])*prices[key]+discounts_applied[1]
     print(totals)
 
 checkout("AAABCCCCCDD")
+
 
 
 
