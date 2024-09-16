@@ -42,6 +42,7 @@ def checkout(skus):
     with open('C:\\Users\\dgcje\\OneDrive - School of Automation\\Documents\\runner-for-python-windows\\accelerate_runner\\prices.csv', "r", ) as prices_file:
         csv_reader = csv.reader(prices_file, delimiter='|')
         prices = {rows[0].strip(): int(rows[1].strip()) for rows in csv_reader}
+        print(prices)
     illegal_input = False
     for letter in skus:
         if letter not in prices.keys():
@@ -64,7 +65,7 @@ def checkout(skus):
                 reduction = free_discount_applied * get_free[key][1][0]
                 if get_free[key][1][1] in letter_count.keys():
                     letter_count[get_free[key][1][1]] -= reduction
-        totals = {"A": 0, "B": 0, "C": 0, "D": 0, "E": 0, "F": 0}
+        totals = {key: 0 for key in prices}
 
         discounts = {
             "A": [(5, 200), (3, 130)],
@@ -88,4 +89,6 @@ def checkout(skus):
                 totals[key] = letter_count[key] * prices[key]
         total = sum(totals.values())
     return total
+
+checkout("H")
 
