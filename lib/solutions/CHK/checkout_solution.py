@@ -32,7 +32,8 @@ def checkout(skus):
 
     print(totals)
 
-checkout("AAAABCCCCCDD")
+checkout("AAAABBBCCCCCDD")
+
 
 
 
