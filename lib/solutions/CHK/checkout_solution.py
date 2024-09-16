@@ -24,7 +24,7 @@ def checkout(skus):
             # for each key in letter_dict, do value % discounts value[0] and take that value away from total but add on value[1]
             discounts_applied = math.floor(letter_dict[key]/discounts[key][0])
             print(f"discounts applied to {key} -> {discounts_applied}")
-            totals[key] = (letter_dict[key] - discounts_applied * discounts[key][0]) * prices[key] + discounts[key][1]
+            totals[key] = (letter_dict[key] - discounts_applied * discounts[key][0]) * prices[key] + discounts_applied*discounts[key][1]
         else:
             discounts_applied = 0
             totals[key] = letter_dict[key] * prices[key]
@@ -34,7 +34,8 @@ def checkout(skus):
         total += value
     print(total)
 
-checkout("ABCD")
+checkout("AAABCD")
+
 
 
 
