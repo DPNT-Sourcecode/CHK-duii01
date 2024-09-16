@@ -46,12 +46,13 @@ def ordered_items_by_price(items: dict, items_to_consider: list):
             output.append(item)
     return output
 
-def apply_bundle_deal(item_count, bundle_items, bundle_size, bundle_price):
-    count = sum(item_count[item] for item in bundle_items if item in item_count)
+def apply_bundle_deal(item_count, bundle_items, bundle_size, bundle_price, prices):
+    ordered_items = ordered_items_by_price(prices, bundle_items)
+    count = sum(item_count[item] for item in ordered_items if item in item_count)
     bundles_applied = count // bundle_size
     remaining_items = count % bundle_size
 
-    for item in bundle_items:
+    for item in ordered_items:
         if item in item_count:
             if item_count[item] <= bundles_applied * bundle_size:
                 bundles_applied -= item_count[item] // bundle_size
@@ -105,7 +106,7 @@ def checkout(skus: str):
         bundle_items = ['S', 'T', 'X', 'Y', 'Z']
         bundle_size = 3
         bundle_price = 45
-        bundle_total, remaining_items = apply_bundle_deal(item_count, bundle_items, bundle_size, bundle_price)
+        bundle_total, remaining_items = apply_bundle_deal(item_count, bundle_items, bundle_size, bundle_price, prices)
         total = bundle_total
 
         for item in item_count:
@@ -124,5 +125,6 @@ def checkout(skus: str):
 
 
 print(checkout("XXXYZ"))
+
 
 
