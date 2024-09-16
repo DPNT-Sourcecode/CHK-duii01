@@ -125,6 +125,3 @@ def checkout(skus: str):
 
 
 print(checkout("XXXYZ"))
-
-
-
