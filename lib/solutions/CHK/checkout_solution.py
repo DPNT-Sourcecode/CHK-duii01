@@ -65,14 +65,14 @@ def checkout(skus: str):
             "R": (3, (1, "Q")),
             "U": (4, (1, "U"))
         }
-        letter_count = {char: skus.count(char) for char in set(skus)}
+        item_count = {char: skus.count(char) for char in set(skus)}
 
         for item in get_free:
-            if item in letter_count:
-                free_discount_applied = math.floor(letter_count[item]/get_free[item][0])
+            if item in item_count:
+                free_discount_applied = math.floor(item_count[item]/get_free[item][0])
                 reduction = free_discount_applied * get_free[item][1][0]
-                if get_free[item][1][1] in letter_count.keys():
-                    letter_count[get_free[item][1][1]] -= reduction
+                if get_free[item][1][1] in item_count.keys():
+                    item_count[get_free[item][1][1]] -= reduction
 
         totals = {key: 0 for key in prices}
 
@@ -90,30 +90,32 @@ def checkout(skus: str):
             1: ("STXYZ",(3, 45))
         }
 
-        # for item in ordered_items_by_price(prices, list(bundle[1][0])):
-        #
-        #
+        for item in ordered_items_by_price(prices, list(bundle[1][0])):
+            
+            item_count[item] =
+
         # bundle_count = 0
-        # for item in letter_count:
+        # for item in item_count:
         #     if item in bundle[1][0]:
-        #         bundle_count += letter_count[item]
+        #         bundle_count += item_count[item]
         # bundle_amount = math.floor(bundle_count / bundle[1][1][0])*bundle[1][1][1]
-        for item in letter_count:
-            if letter_count[item] < 0:
+        for item in item_count:
+            if item_count[item] < 0:
                 pass
             elif item in discounts:
                 for deal in discounts[item]:
-                    discounts_applied = math.floor(letter_count[item]/deal[0])
-                    letter_count[item] = letter_count[item] - discounts_applied * deal[0]
+                    discounts_applied = math.floor(item_count[item]/deal[0])
+                    item_count[item] = item_count[item] - discounts_applied * deal[0]
                     totals[item] += discounts_applied*deal[1]
-                totals[item] += letter_count[item] * prices[item]
+                totals[item] += item_count[item] * prices[item]
             else:
-                totals[item] = letter_count[item] * prices[item]
+                totals[item] = item_count[item] * prices[item]
         total = sum(totals.values())
     return total
 
 
 checkout("XXXYZ")
+
 
 
 
