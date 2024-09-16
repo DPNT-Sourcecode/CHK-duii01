@@ -92,6 +92,10 @@ def checkout(skus: str):
 
         bundle_count = 0
         for item in letter_count:
+            if item in bundle[1][0]:
+                bundle_count += letter_count[item]
+        bundle_amount = math.floor(bundle_count / bundle[1][1][0])*bundle[1][1][1]
+        for item in letter_count:
             if letter_count[item] < 0:
                 pass
             elif item in discounts:
@@ -100,9 +104,6 @@ def checkout(skus: str):
                     letter_count[item] = letter_count[item] - discounts_applied * deal[0]
                     totals[item] += discounts_applied*deal[1]
                 totals[item] += letter_count[item] * prices[item]
-            elif item in bundle[1][0]:
-                bundle_count += letter_count[item]
-                print(item, letter_count[item], bundle_count)
             else:
                 totals[item] = letter_count[item] * prices[item]
         total = sum(totals.values())
@@ -110,5 +111,6 @@ def checkout(skus: str):
 
 
 checkout("XXXYZ")
+
 
 
