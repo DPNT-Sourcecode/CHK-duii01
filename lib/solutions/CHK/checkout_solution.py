@@ -88,5 +88,3 @@ def checkout(skus):
                 totals[key] = letter_count[key] * prices[key]
         total = sum(totals.values())
     return total
-
-
