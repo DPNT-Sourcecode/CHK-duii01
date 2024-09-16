@@ -51,4 +51,5 @@ def checkout(skus):
     return total
 
 
-print(checkout("AAAAABAAA")) # -> 360
+print(checkout("AAAAA"))
+
