@@ -38,9 +38,12 @@ import pandas as pd
 # noinspection PyUnusedLocal
 # skus = unicode string
 
-def order_items_by_price(items: dict):
+def ordered_items_by_price(items: dict, items_to_consider: str):
+    sorted_keys = sorted(items, key=lambda x: items[x], reverse=True)
     
-def checkout(skus):
+    return sorted_keys
+
+def checkout(skus: str):
     # prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10, }
     with open('C:\\Users\\dgcje\\OneDrive - School of Automation\\Documents\\runner-for-python-windows\\accelerate_runner\\prices.csv', "r", ) as prices_file:
         csv_reader = csv.reader(prices_file, delimiter='|')
