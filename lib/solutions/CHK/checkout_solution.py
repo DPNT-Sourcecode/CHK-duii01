@@ -48,9 +48,4 @@ def checkout(skus):
     return total
 
 
-checkout("EEEEB")
-
-
-
-
 
