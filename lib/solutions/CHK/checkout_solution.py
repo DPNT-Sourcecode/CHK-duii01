@@ -29,11 +29,14 @@ def checkout(skus):
             # if letter is in letter_dict then lower divide value by value in dict. Multiply that with number in value multiply by price of B and that is discount
             if key in letter_dict.keys():
                 free_discount_applied = math.floor(letter_dict[key]/get_free[key][0])
-                reduction = free_discount_applied * get_free[key][1][0] * prices[get_free[key][1][1]]
-                print(reduction)
+                reduction = free_discount_applied * get_free[key][1][0]
+                letter_dict[get_free[key][1][1]] -= reduction
+        print(letter_dict)
         totals = {}
         for key in letter_dict.keys():
-            if key in discounts.keys():
+            if letter_dict[key] < 0:
+                pass
+            elif key in discounts.keys():
                 # for each key in letter_dict, do value % discounts value[0] and take that value away from total but add on value[1]
                 discounts_applied = math.floor(letter_dict[key]/discounts[key][0])
                 totals[key] = (letter_dict[key] - discounts_applied * discounts[key][0]) * prices[key] + discounts_applied*discounts[key][1]
@@ -45,9 +48,7 @@ def checkout(skus):
     return total
 
 
-checkout("EE")
-checkout("EEE")
-checkout("EEEE")
+checkout("EEEEB")
 
 
 
