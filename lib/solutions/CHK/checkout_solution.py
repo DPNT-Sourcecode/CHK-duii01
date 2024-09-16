@@ -87,7 +87,7 @@ def checkout(skus: str):
         }
 
         bundle = {
-            "STXYZ": (3, 45)
+            1: ("STXYZ",(3, 45))
         }
 
         for item in letter_count:
@@ -99,7 +99,7 @@ def checkout(skus: str):
                     letter_count[item] = letter_count[item] - discounts_applied * deal[0]
                     totals[item] += discounts_applied*deal[1]
                 totals[item] += letter_count[item] * prices[item]
-            elif item in ordered_items_by_price(list(bundle[0])):
+            elif item in bundle[1][0]:
                 print(item)
             else:
                 totals[item] = letter_count[item] * prices[item]
@@ -108,3 +108,4 @@ def checkout(skus: str):
 
 
 checkout("XXXYZ")
+
