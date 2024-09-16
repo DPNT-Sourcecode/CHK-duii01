@@ -46,6 +46,22 @@ def ordered_items_by_price(items: dict, items_to_consider: list):
             output.append(item)
     return output
 
+def apply_bundle_deal(item_count, bundle_items, bundle_size, bundle_price):
+    count = sum(item_count[item] for item in bundle_items if item in item_count)
+    bundles_applied = count // bundle_size
+    remaining_items = count % bundle_size
+
+    for item in bundle_items:
+        if item in item_count:
+            if item_count[item] <= bundles_applied * bundle_size:
+                bundles_applied -= item_count[item] // bundle_size
+                item_count[item] = 0
+            else:
+                item_count[item] -= bundles_applied * bundle_size
+                break
+
+    return bundles_applied * bundle_price, remaining_items
+
 def checkout(skus: str):
     # prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10, }
     with open('C:\\Users\\dgcje\\OneDrive - School of Automation\\Documents\\runner-for-python-windows\\accelerate_runner\\prices.csv', "r", ) as prices_file:
@@ -86,11 +102,11 @@ def checkout(skus: str):
             "V": [(3, 130), (2, 90)]
         }
 
-        bundle = {
-            1: ("STXYZ",(3, 45))
-        }
-
-        print(item_count)
+        bundle_items = ['S', 'T', 'X', 'Y', 'Z']
+        bundle_size = 3
+        bundle_price = 45
+        bundle_total, remaining_items = apply_bundle_deal(item_count, bundle_items, bundle_size, bundle_price)
+        total = bundle_total
 
         for item in item_count:
             if item_count[item] < 0:
@@ -103,9 +119,10 @@ def checkout(skus: str):
                 totals[item] += item_count[item] * prices[item]
             else:
                 totals[item] = item_count[item] * prices[item]
-        total = sum(totals.values())
+        total += sum(totals.values())
     return total
 
 
-checkout("XXXYZ")
+print(checkout("XXXYZ"))
+
 
