@@ -90,7 +90,8 @@ def checkout(skus: str):
             1: ("STXYZ",(3, 45))
         }
 
-        
+        print(item_count)
+
         for item in item_count:
             if item_count[item] < 0:
                 pass
@@ -107,3 +108,4 @@ def checkout(skus: str):
 
 
 checkout("XXXYZ")
+
