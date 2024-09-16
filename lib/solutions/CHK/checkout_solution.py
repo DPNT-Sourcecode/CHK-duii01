@@ -16,7 +16,7 @@ import math
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40}
+    prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10}
     illegal_input = False
     for letter in skus:
         if letter not in prices.keys():
@@ -33,7 +33,7 @@ def checkout(skus):
                 reduction = free_discount_applied * get_free[key][1][0]
                 if get_free[key][1][1] in letter_count.keys():
                     letter_count[get_free[key][1][1]] -= reduction
-        totals = {"A": 0, "B": 0, "C": 0, "D": 0, "E": 0}
+        totals = {"A": 0, "B": 0, "C": 0, "D": 0, "E": 0, "F": 0}
 
         discounts = {"A": [(5, 200), (3, 130)], "B": [(2, 45)]}
         for key in letter_count:
@@ -50,6 +50,3 @@ def checkout(skus):
                 totals[key] = letter_count[key] * prices[key]
         total = sum(totals.values())
     return total
-
-
-print(checkout("FFF"))
