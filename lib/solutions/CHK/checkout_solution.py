@@ -40,8 +40,8 @@ import pandas as pd
 def checkout(skus):
     # prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10, }
     with open('C:\\Users\\dgcje\\OneDrive - School of Automation\\Documents\\runner-for-python-windows\\accelerate_runner\\prices.csv', "r", ) as prices_file:
-        csv_reader = csv.reader(prices_file)
-        prices = {rows[0]: rows[1] for rows in csv_reader}
+        csv_reader = csv.reader(prices_file, delimiter='|')
+        prices = {rows[0].strip(): int(rows[1].strip()) for rows in csv_reader}
     print(prices)
     illegal_input = False
     for letter in skus:
@@ -70,7 +70,6 @@ def checkout(skus):
                     discounts_applied = math.floor(letter_count[key]/deal[0])
                     letter_count[key] = letter_count[key] - discounts_applied * deal[0]
                     totals[key] += discounts_applied*deal[1]
-                    print(letter_count)
                 totals[key] += letter_count[key] * prices[key]
             else:
                 totals[key] = letter_count[key] * prices[key]
@@ -78,3 +77,4 @@ def checkout(skus):
     return total
 
 checkout("ABC")
+
