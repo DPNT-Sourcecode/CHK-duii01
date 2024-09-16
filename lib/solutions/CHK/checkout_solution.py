@@ -34,13 +34,14 @@ Our price table and offers:
 import math
 import csv
 
-with open("lib/solutions/prices.csv", "r") as prices_file:
-
-
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10, }
+    # prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10, }
+    with open('prices.csv', "r") as prices_file:
+        csv_reader = csv.reader(prices_file)
+        prices = {rows[0]: rows[1] for rows in csv_reader}
+    print(prices)
     illegal_input = False
     for letter in skus:
         if letter not in prices.keys():
@@ -74,3 +75,5 @@ def checkout(skus):
                 totals[key] = letter_count[key] * prices[key]
         total = sum(totals.values())
     return total
+
+checkout("ABC")
