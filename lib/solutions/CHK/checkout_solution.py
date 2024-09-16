@@ -38,10 +38,12 @@ import pandas as pd
 # noinspection PyUnusedLocal
 # skus = unicode string
 
-def ordered_items_by_price(items: dict, items_to_consider: str):
+def ordered_items_by_price(items: dict, items_to_consider: list):
     sorted_keys = sorted(items, key=lambda x: items[x], reverse=True)
-    
-    return sorted_keys
+    sorted_items_to_consider = [item for item in items if item in items_to_consider]
+    return sorted_items_to_consider
+
+print(ordered_items_by_price({1: 100, 2:300, 3: 200}, [1, 3]))
 
 def checkout(skus: str):
     # prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10, }
@@ -94,3 +96,4 @@ def checkout(skus: str):
                 totals[key] = letter_count[key] * prices[key]
         total = sum(totals.values())
     return total
+
