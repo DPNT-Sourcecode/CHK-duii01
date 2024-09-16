@@ -14,14 +14,20 @@ Our price table and offers:
 # skus = unicode string
 def checkout(skus):
     prices = {"A": 50, "B": 30, "C": 20, "D": 15}
-    discounts = {"AAA": 130, "BB": 45}
+    discounts = {"A": (3,130), "B": (2,45)}
     letter_dict = {char: skus.count(char) for char in set(skus)}
     totals = {}
+    print(letter_dict)
     for key in letter_dict.keys():
-        totals[key] = letter_dict[key]*prices[key]
+        print(key)
+        # for each key in letter_dict, do value % discounts value[0] and take that value away from total but add on value[1]
+        discounts_applied = letter_dict[key]%discounts[key][0]
+        print(discounts_applied)
+        totals[key] = (letter_dict[key]-discounts_applied*discounts[key][0])*prices[key]+discounts_applied[1]
     print(totals)
 
 checkout("AAABCCCCCDD")
+
 
 
 
