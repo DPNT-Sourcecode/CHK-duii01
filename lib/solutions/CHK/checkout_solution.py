@@ -34,7 +34,7 @@ def checkout(skus):
                     letter_count[get_free[key][1][1]] -= reduction
         totals = {"A": 0, "B": 0, "C": 0, "D": 0, "E": 0}
 
-        discounts = {"A": [(5, 120), (3, 130)], "B": [(2, 45)]}
+        discounts = {"A": [(5, 200), (3, 130)], "B": [(2, 45)]}
         for key in letter_count:
             if letter_count[key] < 0:
                 pass
@@ -49,7 +49,3 @@ def checkout(skus):
                 totals[key] = letter_count[key] * prices[key]
         total = sum(totals.values())
     return total
-
-
-print(checkout("AAAAA"))
-
