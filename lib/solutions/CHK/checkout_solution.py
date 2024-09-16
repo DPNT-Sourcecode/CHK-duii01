@@ -30,8 +30,8 @@ def checkout(skus):
             if key in letter_dict.keys():
                 free_discount_applied = math.floor(letter_dict[key]/get_free[key][0])
                 reduction = free_discount_applied * get_free[key][1][0]
-                letter_dict[get_free[key][1][1]] -= reduction
-        print(letter_dict)
+                if get_free[key][1][1] in letter_dict.keys():
+                    letter_dict[get_free[key][1][1]] -= reduction
         totals = {}
         for key in letter_dict.keys():
             if letter_dict[key] < 0:
@@ -48,7 +48,14 @@ def checkout(skus):
     return total
 
 
-checkout("E")
+class CheckoutSystem:
+    def __init__(self):
+        self.prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40}
+        self.discounts = {"A": (3, 130), "B": (2, 45)}
+        self.get_free = {"E": (2, (1, "B"))}
+
+
+
 
 
 
