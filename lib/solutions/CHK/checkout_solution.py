@@ -42,70 +42,69 @@ def ordered_items_by_price(items: dict, items_to_consider: list):
     sorted_keys = sorted(items, key=lambda x: items[x], reverse=True)
     output = []
     for item in sorted_keys:
-        print(item)
         if item in items_to_consider:
             output.append(item)
-            print(output)
     return output
 
-print(ordered_items_by_price({1: 100, 2: 200, 3: 150}, [2,3]))
+def checkout(skus: str):
+    # prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10, }
+    with open('C:\\Users\\dgcje\\OneDrive - School of Automation\\Documents\\runner-for-python-windows\\accelerate_runner\\prices.csv', "r", ) as prices_file:
+        csv_reader = csv.reader(prices_file, delimiter='|')
+        prices = {rows[0].strip(): int(rows[1].strip()) for rows in csv_reader}
+    illegal_input = False
+    for letter in skus:
+        if letter not in prices.keys():
+            illegal_input = True
+            total = -1
+            break
+    if illegal_input == False:
+        get_free = {
+            "E": (2, (1, "B")),
+            "F": (3, (1, "F")),
+            "N": (3, (1, "M")),
+            "R": (3, (1, "Q")),
+            "U": (4, (1, "U"))
+        }
+        letter_count = {char: skus.count(char) for char in set(skus)}
 
-# def checkout(skus: str):
-#     # prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10, }
-#     with open('C:\\Users\\dgcje\\OneDrive - School of Automation\\Documents\\runner-for-python-windows\\accelerate_runner\\prices.csv', "r", ) as prices_file:
-#         csv_reader = csv.reader(prices_file, delimiter='|')
-#         prices = {rows[0].strip(): int(rows[1].strip()) for rows in csv_reader}
-#     illegal_input = False
-#     for letter in skus:
-#         if letter not in prices.keys():
-#             illegal_input = True
-#             total = -1
-#             break
-#     if illegal_input == False:
-#         get_free = {
-#             "E": (2, (1, "B")),
-#             "F": (3, (1, "F")),
-#             "N": (3, (1, "M")),
-#             "R": (3, (1, "Q")),
-#             "U": (4, (1, "U"))
-#         }
-#         letter_count = {char: skus.count(char) for char in set(skus)}
-#
-#         for item in get_free:
-#             if item in letter_count:
-#                 free_discount_applied = math.floor(letter_count[item]/get_free[item][0])
-#                 reduction = free_discount_applied * get_free[item][1][0]
-#                 if get_free[item][1][1] in letter_count.keys():
-#                     letter_count[get_free[item][1][1]] -= reduction
-#
-#         totals = {key: 0 for key in prices}
-#
-#         discounts = {
-#             "A": [(5, 200), (3, 130)],
-#             "B": [(2, 45)],
-#             "H": [(10, 80), (5, 45)],
-#             "K": [(2, 150)],
-#             "P": [(5, 200)],
-#             "Q": [(3, 80)],
-#             "V": [(3, 130), (2, 90)]
-#         }
-#
-#         bundle = {
-#             "STXYZ": (3, 45)
-#         }
-#
-#         for item in letter_count:
-#             if letter_count[item] < 0:
-#                 pass
-#             elif item in discounts:
-#                 for deal in discounts[item]:
-#                     discounts_applied = math.floor(letter_count[item]/deal[0])
-#                     letter_count[item] = letter_count[item] - discounts_applied * deal[0]
-#                     totals[item] += discounts_applied*deal[1]
-#                 totals[item] += letter_count[item] * prices[item]
-#             elif item in ordered_items_by_price()
-#             else:
-#                 totals[item] = letter_count[item] * prices[item]
-#         total = sum(totals.values())
-#     return total
+        for item in get_free:
+            if item in letter_count:
+                free_discount_applied = math.floor(letter_count[item]/get_free[item][0])
+                reduction = free_discount_applied * get_free[item][1][0]
+                if get_free[item][1][1] in letter_count.keys():
+                    letter_count[get_free[item][1][1]] -= reduction
 
+        totals = {key: 0 for key in prices}
+
+        discounts = {
+            "A": [(5, 200), (3, 130)],
+            "B": [(2, 45)],
+            "H": [(10, 80), (5, 45)],
+            "K": [(2, 150)],
+            "P": [(5, 200)],
+            "Q": [(3, 80)],
+            "V": [(3, 130), (2, 90)]
+        }
+
+        bundle = {
+            "STXYZ": (3, 45)
+        }
+
+        for item in letter_count:
+            if letter_count[item] < 0:
+                pass
+            elif item in discounts:
+                for deal in discounts[item]:
+                    discounts_applied = math.floor(letter_count[item]/deal[0])
+                    letter_count[item] = letter_count[item] - discounts_applied * deal[0]
+                    totals[item] += discounts_applied*deal[1]
+                totals[item] += letter_count[item] * prices[item]
+            elif item in ordered_items_by_price(list(bundle[0])):
+                print(item)
+            else:
+                totals[item] = letter_count[item] * prices[item]
+        total = sum(totals.values())
+    return total
+
+
+checkout("XXXYZ")
