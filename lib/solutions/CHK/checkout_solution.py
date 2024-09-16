@@ -90,11 +90,14 @@ def checkout(skus: str):
             1: ("STXYZ",(3, 45))
         }
 
-        bundle_count = 0
-        for item in letter_count:
-            if item in bundle[1][0]:
-                bundle_count += letter_count[item]
-        bundle_amount = math.floor(bundle_count / bundle[1][1][0])*bundle[1][1][1]
+        # for item in ordered_items_by_price(prices, list(bundle[1][0])):
+        #
+        #
+        # bundle_count = 0
+        # for item in letter_count:
+        #     if item in bundle[1][0]:
+        #         bundle_count += letter_count[item]
+        # bundle_amount = math.floor(bundle_count / bundle[1][1][0])*bundle[1][1][1]
         for item in letter_count:
             if letter_count[item] < 0:
                 pass
@@ -111,6 +114,7 @@ def checkout(skus: str):
 
 
 checkout("XXXYZ")
+
 
 
 
