@@ -67,7 +67,3 @@ class CheckoutSystem:
             letter_dict = {char: skus.count(char) for char in set(skus)}
             for key in self.get_free.keys():
                 free_discount_applied = math.floor()
-
-
-
-
