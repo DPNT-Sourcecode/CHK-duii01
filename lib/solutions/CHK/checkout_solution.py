@@ -15,9 +15,12 @@ Our price table and offers:
 def checkout(skus):
     prices = {"A": 50, "B": 30, "C": 20, "D": 15}
     discounts = {"AAA": 130, "BB": 45}
-    sorted_skus = list(skus).sort()
+    sorted_skus = skus.split().sort()
     print(sorted_skus)
 
 
 checkout("ACCDDABAC")
+
+
+
 
