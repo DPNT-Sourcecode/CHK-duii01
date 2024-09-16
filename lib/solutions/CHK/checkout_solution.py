@@ -37,6 +37,9 @@ import pandas as pd
 
 # noinspection PyUnusedLocal
 # skus = unicode string
+
+def order_items_by_price(items: dict):
+    
 def checkout(skus):
     # prices = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10, }
     with open('C:\\Users\\dgcje\\OneDrive - School of Automation\\Documents\\runner-for-python-windows\\accelerate_runner\\prices.csv', "r", ) as prices_file:
