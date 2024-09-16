@@ -69,7 +69,7 @@ def checkout(skus):
         discounts = {
             "A": [(5, 200), (3, 130)],
             "B": [(2, 45)],
-            "H": [(10, 80), (5, 40)],
+            "H": [(10, 80), (5, 45)],
             "K": [(2, 150)],
             "P": [(5, 200)],
             "Q": [(3, 80)],
@@ -88,4 +88,5 @@ def checkout(skus):
                 totals[key] = letter_count[key] * prices[key]
         total = sum(totals.values())
     return total
+
 
