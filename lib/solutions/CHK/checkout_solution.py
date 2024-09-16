@@ -24,9 +24,13 @@ def checkout(skus):
     if illegal_input == False:
         discounts = {"A": (3,130), "B": (2,45)}
         get_free = {"E": (2,(1,"B"))}
-        for key in get_free.keys():
-            
         letter_dict = {char: skus.count(char) for char in set(skus)}
+        for key in get_free.keys():
+            # if letter is in letter_dict then lower divide value by value in dict. Multiply that with number in value multiply by price of B and that is discount
+            if key in letter_dict.keys():
+                free_discount_applied = math.floor(letter_dict[key]/get_free[key][0])
+                reduction = free_discount_applied * get_free[key][1][0] * prices[get_free[key][1][1]]
+                print(reduction)
         totals = {}
         for key in letter_dict.keys():
             if key in discounts.keys():
@@ -39,6 +43,11 @@ def checkout(skus):
         for value in totals.values():
             total += value
     return total
+
+
+checkout("EE")
+checkout("EEE")
+checkout("EEEE")
 
 
 
