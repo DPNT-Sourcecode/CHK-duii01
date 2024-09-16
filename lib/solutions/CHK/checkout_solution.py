@@ -55,6 +55,18 @@ class CheckoutSystem:
         self.get_free = {"E": (2, (1, "B"))}
 
 
+    def checkout(self, skus):
+        illegal_input = False
+        for letter in skus:
+            if letter not in self.prices.keys():
+                illegal_input = True
+                total = -1
+                break
+
+        if not illegal_input:
+            letter_dict = {char: skus.count(char) for char in set(skus)}
+            for key in self.get_free.keys():
+                free_discount_applied = math.floor()
 
 
 
