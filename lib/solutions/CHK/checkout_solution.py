@@ -32,7 +32,7 @@ def checkout(skus):
                 reduction = free_discount_applied * get_free[key][1][0]
                 if get_free[key][1][1] in letter_dict.keys():
                     letter_dict[get_free[key][1][1]] -= reduction
-        totals = {}
+        totals = {"A": 0, "B": 0, "C": 0, "D": 0, "E": 0}
 
         discounts = {"A": [(5, 120), (3, 130)], "B": [(2, 45)]}
         for key in letter_dict:
