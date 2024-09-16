@@ -8,6 +8,7 @@ Our price table and offers:
 | C    | 20    |                        |
 | D    | 15    |                        |
 | E    | 40    | 2E get one B free      |
+| F    | 10    | 2F get one F free      |
 +------+-------+------------------------+
 """
 import math
@@ -23,7 +24,7 @@ def checkout(skus):
             total = -1
             break
     if illegal_input == False:
-        get_free = {"E": (2, (1, "B"))}
+        get_free = {"E": (2, (1, "B")), "F": (3, (1, "F"))}
         letter_count = {char: skus.count(char) for char in set(skus)}
 
         for key in get_free:
@@ -49,3 +50,6 @@ def checkout(skus):
                 totals[key] = letter_count[key] * prices[key]
         total = sum(totals.values())
     return total
+
+
+print(checkout("FFF"))
