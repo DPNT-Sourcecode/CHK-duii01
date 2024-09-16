@@ -16,9 +16,13 @@ def checkout(skus):
     prices = {"A": 50, "B": 30, "C": 20, "D": 15}
     discounts = {"AAA": 130, "BB": 45}
     letter_dict = {char: skus.count(char) for char in set(skus)}
-    print(letter_dict)
+    totals = {}
+    for key in letter_dict.keys():
+        totals[key] = letter_dict[key]*prices[key]
+    print(totals)
 
 checkout("AAABCCCCCDD")
+
 
 
 
